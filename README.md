@@ -35,4 +35,6 @@ After you created the native executable, you can spin up the app using:
 docker compose up
 ```
 
+## Development workflow
+See our [Cheat Sheet](CheatSheet.md) for our development workflow.
 
