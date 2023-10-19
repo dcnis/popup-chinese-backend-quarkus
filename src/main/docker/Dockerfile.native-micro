@@ -4,19 +4,28 @@
 # It reduces the size of the resulting container image.
 # Check https://quarkus.io/guides/quarkus-runtime-base-image for further information about this image.
 #
-# Before building the container image run:
+# Before building the container image run following command to create the native executable
 #
-# ./mvnw package -Dnative
+# mvn package -Dnative
+#
+# Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
+#
+# mvn package -Dnative -Dquarkus.native.container-build=true
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.native-micro -t quarkus/popup-chinese-backend-quarkus .
+# docker build -f src/main/docker/Dockerfile.native-micro -t dcnis/popup-chinese-backend-quarkus .
 #
 # Then run the container using:
 #
 # docker run -i --rm -p 8080:8080 quarkus/popup-chinese-backend-quarkus
 #
+# Or with docker-compose using:
+#
+# docker compose up
+#
 ###
+
 FROM quay.io/quarkus/quarkus-micro-image:2.0
 WORKDIR /work/
 RUN chown 1001 /work \
