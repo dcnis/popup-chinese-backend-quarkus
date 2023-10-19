@@ -7,15 +7,15 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
-public class GreetingResourceTest {
+public class LessonITTest {
 
     @Test
-    public void testHelloEndpoint() {
+    public void testCreateLessonEndpoint() {
         given()
           .when().post("/lesson/create?name=one")
           .then()
              .statusCode(200)
-             .body(is("Lesson one created"));
+             .body(is("Lesson one was created"));
     }
 
 }
