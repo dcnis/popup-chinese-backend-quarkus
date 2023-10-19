@@ -12,10 +12,10 @@ public class GreetingResourceTest {
     @Test
     public void testHelloEndpoint() {
         given()
-          .when().post("/hello?name=Dennis")
+          .when().post("/lesson/create?name=one")
           .then()
              .statusCode(200)
-             .body(is("Welcome to my app Dennis"));
+             .body(is("Lesson one created"));
     }
 
 }
