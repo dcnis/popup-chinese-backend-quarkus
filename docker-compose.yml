@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: popup-chinese-app
+    build:
+      dockerfile: src/main/docker/Dockerfile.native-micro
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    ports:
+      - "8080:8080"
