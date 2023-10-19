@@ -21,10 +21,10 @@ class LessonControllerTest {
         // GIVEN
 
         // WHEN
-        String result = testee.hello();
+        String result = testee.hello("Dennis");
 
         // THEN
-        Mockito.verify(lessonService).greeting();
+        Mockito.verify(lessonService).greeting("Dennis");
 
     }
 

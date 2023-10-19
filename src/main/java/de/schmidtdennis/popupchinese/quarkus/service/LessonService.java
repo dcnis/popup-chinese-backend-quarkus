@@ -5,8 +5,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class LessonService {
 
-    public String greeting(){
-        return "my app";
+    public String greeting(String name){
+        return "Welcome to my app " + name;
     }
 
 }
