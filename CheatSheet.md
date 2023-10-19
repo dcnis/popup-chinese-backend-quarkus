@@ -10,7 +10,7 @@ mvn compile quarkus:dev
 
 ### 2. Produce a native executable
 ```bash
-mvn package -Dnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true
+mvn package -Dnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true -Dquarkus.profile=prod
 ```
 
 ### 3. Build the docker image
