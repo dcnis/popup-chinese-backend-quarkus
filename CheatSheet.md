@@ -10,7 +10,7 @@ mvn compile quarkus:dev
 
 ### 2. Produce a native executable
 ```bash
-mvn package -Dnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true -Dquarkus.profile=prod
+mvn clean package -Dnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true -Dquarkus.profile=prod
 ```
 
 ### 3. Build the docker image
@@ -35,4 +35,15 @@ docker run -i --rm -p 8080:8080 dcnis/popup-chinese-backend-quarkus
 
 ```bash
 docker push dcnis/popup-chinese-backend-quarkus
+```
+
+## Connect to RDS PostgreSQL from EC2 instance
+
+```
+psql \
+--host=<DB instance endpoint> \
+--port=<port> \
+--username=<master username> \
+--password \
+--dbname=<database name> 
 ```

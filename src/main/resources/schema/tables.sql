@@ -1,6 +1,0 @@
-CREATE SEQUENCE IF NOT EXISTS lessons_SEQ START 1 INCREMENT 50;
-CREATE TABLE IF NOT EXISTS lessons (
-     id bigint PRIMARY KEY,
-     name varchar(50) NOT NULL
-     );
-
