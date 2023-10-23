@@ -9,25 +9,25 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity(name = "lessons")
+@Entity(name = "vocabularies")
 @Setter
 @Getter
-public class LessonDO extends PanacheEntityBase {
+public class VocabularyDO extends PanacheEntityBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
+    @Column(name = "lesson_id")
+    private Long lessonId;
 
-    private String discussion;
+    private String category;
 
-    @Column(name = "thumbnail_url")
-    private String thumbnailUrl;
+    private String pinyin;
+    private String chinese;
+    private String english;
 
-    @Column(name = "audio_url")
-    private String audioUrl;
-
-    private String difficulty;
+    @Column(name = "vocabulary_order")
+    public Integer vocabularyOrder;
 
 }
