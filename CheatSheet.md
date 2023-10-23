@@ -15,7 +15,7 @@ mvn clean package -Dnative -Dquarkus.native.container-build=true -Dquarkus.conta
 
 ### 3. Build the docker image
 Based on the `Dockerfile.native-micro`, create a docker image.
-
+    
 ```bash
 docker build -f src/main/docker/Dockerfile.native-micro -t dcnis/popup-chinese-backend-quarkus .
 ```
@@ -28,7 +28,7 @@ docker compose up
 ```
 Or run the backend quarkus app image manually via `docker run`
 ```bash
-docker run -i --rm -p 8080:8080 dcnis/popup-chinese-backend-quarkus 
+docker run -i --rm -p 8080:8080 -e DB_USERNAME=postgres -e DB_PASSWORD=postgres -e DB_URI=jdbc:postgresql://172.17.0.2:5432/postgres dcnis/popup-chinese-backend-quarkus
 ```
 
 ### 5. Push the docker image to Docker Hub
