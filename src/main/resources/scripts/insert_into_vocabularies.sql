@@ -1,8 +1,3 @@
--- lessons
-INSERT INTO lessons(title, discussion, difficulty, thumbnail_url, audio_url)
-VALUES ('Last Lesson', 'This is a discussion', 'BEGINNER', 'https://thumbnail.de', 'https://audiourl.com');
-
--- vocabularies
 insert into vocabularies (lesson_id, category, pinyin, chinese, english, vocabulary_order)
 values (1, 'noun', 'Tàitǎnníkè hào', '泰坦尼克号', 'Titanic', 1);
 
