@@ -1,32 +1,39 @@
 package de.schmidtdennis.popupchinese.quarkus.converter;
 
-import de.schmidtdennis.popupchinese.quarkus.model.db.LessonDO;
-import de.schmidtdennis.popupchinese.quarkus.model.request.LessonReq;
-import de.schmidtdennis.popupchinese.quarkus.model.vo.LessonVO;
+import de.schmidtdennis.popupchinese.quarkus.enums.Difficulty;
+import de.schmidtdennis.popupchinese.quarkus.model.dataobject.LessonDO;
+import de.schmidtdennis.popupchinese.quarkus.model.request.LessonAddReq;
+import de.schmidtdennis.popupchinese.quarkus.model.valueobject.LessonVO;
 import jakarta.enterprise.context.ApplicationScoped;
-import org.apache.commons.beanutils.BeanUtils;
-import org.jboss.logging.Logger;
-
 
 @ApplicationScoped
 public class LessonConverter {
 
-    private static final Logger log = Logger.getLogger(LessonConverter.class);
-
-    public LessonDO toDO(LessonReq lesson){
+    public LessonDO toDO(LessonAddReq lesson) {
         LessonDO newLesson = new LessonDO();
         newLesson.setTitle(lesson.getTitle());
+        newLesson.setDiscussion(lesson.getDiscussion());
+        newLesson.setThumbnailUrl(lesson.getThumbnailUrl());
+        newLesson.setAudioUrl(lesson.getAudioUrl());
+
+        if(lesson.getDifficulty() != null){
+            newLesson.setDifficulty(lesson.getDifficulty().name());
+        }
+
         return newLesson;
     }
 
     public LessonVO toVO(LessonDO lessonDO) {
         LessonVO lessonVO = new LessonVO();
-        try {
-            BeanUtils.copyProperties(lessonVO, lessonDO);
-            // set other fields if needed
-        } catch (Exception e) {
-            log.error("Error trying to copy bean properties");
-            return null;
+
+        lessonVO.setId(lessonDO.getId());
+        lessonVO.setTitle(lessonDO.getTitle());
+        lessonVO.setDiscussion(lessonDO.getDiscussion());
+        lessonVO.setThumbnailUrl(lessonDO.getThumbnailUrl());
+        lessonVO.setAudioUrl(lessonDO.getAudioUrl());
+
+        if(lessonDO.getDifficulty() != null){
+            lessonVO.setDifficulty(Difficulty.getEnumValue(lessonDO.getDifficulty()));
         }
 
         return lessonVO;

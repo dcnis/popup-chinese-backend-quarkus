@@ -1,7 +1,7 @@
 package de.schmidtdennis.popupchinese.quarkus.controller;
 
-import de.schmidtdennis.popupchinese.quarkus.model.request.LessonReq;
-import de.schmidtdennis.popupchinese.quarkus.model.vo.LessonVO;
+import de.schmidtdennis.popupchinese.quarkus.model.request.LessonAddReq;
+import de.schmidtdennis.popupchinese.quarkus.model.valueobject.LessonVO;
 import de.schmidtdennis.popupchinese.quarkus.service.LessonService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -23,7 +23,7 @@ public class LessonController {
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public LessonVO add(LessonReq lesson) {
+    public LessonVO add(LessonAddReq lesson) {
         // TODO Validator
         return lessonService.add(lesson);
     }

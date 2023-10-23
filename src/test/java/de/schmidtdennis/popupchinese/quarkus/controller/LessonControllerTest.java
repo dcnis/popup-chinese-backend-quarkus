@@ -1,7 +1,7 @@
 package de.schmidtdennis.popupchinese.quarkus.controller;
 
-import de.schmidtdennis.popupchinese.quarkus.model.request.LessonReq;
-import de.schmidtdennis.popupchinese.quarkus.model.vo.LessonVO;
+import de.schmidtdennis.popupchinese.quarkus.model.request.LessonAddReq;
+import de.schmidtdennis.popupchinese.quarkus.model.valueobject.LessonVO;
 import de.schmidtdennis.popupchinese.quarkus.service.LessonService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -21,7 +21,7 @@ class LessonControllerTest {
     @Test
     public void testAdd(){
         // GIVEN
-        LessonReq req = new LessonReq();
+        LessonAddReq req = new LessonAddReq();
         req.setTitle("First Lesson");
 
         // WHEN

@@ -1,10 +1,9 @@
 package de.schmidtdennis.popupchinese.quarkus.service;
 
 import de.schmidtdennis.popupchinese.quarkus.converter.LessonConverter;
-import de.schmidtdennis.popupchinese.quarkus.model.db.LessonDO;
-import de.schmidtdennis.popupchinese.quarkus.model.request.LessonReq;
-import de.schmidtdennis.popupchinese.quarkus.model.vo.LessonVO;
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import de.schmidtdennis.popupchinese.quarkus.model.dataobject.LessonDO;
+import de.schmidtdennis.popupchinese.quarkus.model.request.LessonAddReq;
+import de.schmidtdennis.popupchinese.quarkus.model.valueobject.LessonVO;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -20,7 +19,7 @@ public class LessonService {
     private LessonConverter lessonConverter;
 
     @Transactional
-    public LessonVO add(LessonReq lesson){
+    public LessonVO add(LessonAddReq lesson){
         LessonDO lessonDO = lessonConverter.toDO(lesson);
         lessonDO.persist();
         return lessonConverter.toVO(lessonDO);
