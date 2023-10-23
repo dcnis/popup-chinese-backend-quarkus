@@ -29,10 +29,9 @@ public class LessonController {
     }
 
     @POST()
-    @Path("/delete/{id:\\d+}\"")
+    @Path("/delete/{id:\\d+}")
     public boolean delete(Integer id) {
-        lessonService.delete(id);
-        return true;
+        return lessonService.delete(id);
     }
 
     @GET

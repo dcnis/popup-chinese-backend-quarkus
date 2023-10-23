@@ -43,7 +43,8 @@ public class LessonService {
                 .collect(Collectors.toList());
     }
 
-    public void delete(Integer id) {
-        LessonDO.deleteById(id);
+    @Transactional
+    public boolean delete(Integer id) {
+        return LessonDO.deleteById(id);
     }
 }
