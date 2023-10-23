@@ -1,14 +1,15 @@
 package de.schmidtdennis.popupchinese.quarkus.controller;
 
-import de.schmidtdennis.popupchinese.quarkus.model.Lesson;
+import de.schmidtdennis.popupchinese.quarkus.model.request.LessonReq;
+import de.schmidtdennis.popupchinese.quarkus.model.vo.LessonVO;
 import de.schmidtdennis.popupchinese.quarkus.service.LessonService;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
-import org.jboss.resteasy.reactive.RestQuery;
 
 import java.util.List;
 
@@ -19,21 +20,30 @@ public class LessonController {
     private LessonService lessonService;
 
     @POST()
-    @Path("/create")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String create(@RestQuery String name) {
-        return lessonService.create(name);
+    @Path("/add")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public LessonVO add(LessonReq lesson) {
+        // TODO Validator
+        return lessonService.add(lesson);
+    }
+
+    @POST()
+    @Path("/delete/{id:\\d+}\"")
+    public boolean delete(Integer id) {
+        lessonService.delete(id);
+        return true;
     }
 
     @GET
-    @Path("/get")
-    public Lesson get(@RestQuery String name){
-        return lessonService.get(name);
+    @Path("/{id:\\d+}")
+    public LessonVO get(Integer id){
+        return lessonService.getById(id);
     }
 
     @GET
     @Path("/getAll")
-    public List<Lesson> get(){
+    public List<LessonVO> getAll(){
         return lessonService.getAll();
     }
 
