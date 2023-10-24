@@ -35,6 +35,16 @@ public class UserService {
         return userConverter.toVO(userDO);
     }
 
+    public UserVO getByEmail(String email){
+        UserDO userDO = UserDO.find("email", email).firstResult();
+
+        if(userDO == null){
+            throw new IllegalArgumentException("User not found with email: " + email);
+        }
+
+        return userConverter.toVO(userDO);
+    }
+
     public List<UserVO> getAll(){
         List<UserDO> userDOs = UserDO.listAll();
         return userDOs.stream()

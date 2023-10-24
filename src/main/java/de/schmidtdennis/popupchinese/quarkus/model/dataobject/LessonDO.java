@@ -6,10 +6,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity(name = "lessons")
+@Entity
+@Table(name = "lessons")
 @Setter
 @Getter
 public class LessonDO extends PanacheEntityBase {

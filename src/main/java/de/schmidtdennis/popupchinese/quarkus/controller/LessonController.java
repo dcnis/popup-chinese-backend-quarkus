@@ -3,6 +3,8 @@ package de.schmidtdennis.popupchinese.quarkus.controller;
 import de.schmidtdennis.popupchinese.quarkus.model.request.LessonAddReq;
 import de.schmidtdennis.popupchinese.quarkus.model.valueobject.LessonVO;
 import de.schmidtdennis.popupchinese.quarkus.service.LessonService;
+import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -20,6 +22,7 @@ public class LessonController {
     private LessonService lessonService;
 
     @POST()
+    @RolesAllowed("admin")
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -29,18 +32,21 @@ public class LessonController {
     }
 
     @POST()
+    @RolesAllowed("admin")
     @Path("/delete/{id:\\d+}")
     public boolean delete(Integer id) {
         return lessonService.delete(id);
     }
 
     @GET
+    @PermitAll
     @Path("/{id:\\d+}")
     public LessonVO get(Integer id){
         return lessonService.getById(id);
     }
 
     @GET
+    @PermitAll
     @Path("/getAll")
     public List<LessonVO> getAll(){
         return lessonService.getAll();
