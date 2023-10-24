@@ -1,6 +1,6 @@
 # Cheat Sheet
 
-## Development workflow
+# Development workflow
 
 ### 1. Build your app in development mode
 
@@ -39,11 +39,31 @@ docker push dcnis/popup-chinese-backend-quarkus
 
 ## Connect to RDS PostgreSQL from EC2 instance
 
-```
+```bash
 psql \
 --host=<DB instance endpoint> \
 --port=<port> \
 --username=<master username> \
 --password \
 --dbname=<database name> 
+```
+
+# DynamoDB
+
+## Run DynamoDB locally in docker
+```bash
+docker run --publish 4566:8000 --name dynamodb amazon/dynamodb-local:1.22.0 -jar DynamoDBLocal.jar -inMemory -sharedDb
+```
+
+## Check DynamoDB tables
+```bash
+aws dynamodb list-tables --endpoint-url http://localhost:4566
+```
+
+## Create DynamoDB table
+```bash
+aws dynamodb create-table --table-name QuarkusFruits \
+                          --attribute-definitions AttributeName=fruitName,AttributeType=S \
+                          --key-schema AttributeName=fruitName,KeyType=HASH \
+                          --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
 ```

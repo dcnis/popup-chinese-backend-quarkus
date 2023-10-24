@@ -1,7 +1,9 @@
 package de.schmidtdennis.popupchinese.quarkus.controller;
 
 import de.schmidtdennis.popupchinese.quarkus.model.request.UserAddReq;
+import de.schmidtdennis.popupchinese.quarkus.model.valueobject.LikeVO;
 import de.schmidtdennis.popupchinese.quarkus.model.valueobject.UserVO;
+import de.schmidtdennis.popupchinese.quarkus.service.LikeService;
 import de.schmidtdennis.popupchinese.quarkus.service.UserService;
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
@@ -11,6 +13,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.SecurityContext;
@@ -22,6 +25,9 @@ public class UserController {
 
     @Inject
     private UserService userService;
+
+    @Inject
+    private LikeService likeService;
 
     @POST
     @Path("/add")
@@ -60,6 +66,22 @@ public class UserController {
     @Path("/getAll")
     public List<UserVO> getAll(){
         return userService.getAll();
+    }
+
+    @POST
+    @RolesAllowed(value = {"user", "admin"})
+    @Path("/likes/add")
+    public LikeVO addLike(@Context SecurityContext securityContext, @QueryParam("lessonId") Long lessonId){
+        String userEmail = securityContext.getUserPrincipal().getName();
+        return likeService.add(userEmail, lessonId);
+    }
+
+    @GET
+    @RolesAllowed(value = {"user", "admin"})
+    @Path("/likes/getAll")
+    public List<LikeVO> getLikes(@Context SecurityContext securityContext){
+        String userEmail = securityContext.getUserPrincipal().getName();
+        return likeService.getAll(userEmail);
     }
 
 }
