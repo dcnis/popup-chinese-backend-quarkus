@@ -1,8 +1,10 @@
 package de.schmidtdennis.popupchinese.quarkus.controller;
 
 import de.schmidtdennis.popupchinese.quarkus.model.request.UserAddReq;
+import de.schmidtdennis.popupchinese.quarkus.model.valueobject.HistoryItemVO;
 import de.schmidtdennis.popupchinese.quarkus.model.valueobject.LikeVO;
 import de.schmidtdennis.popupchinese.quarkus.model.valueobject.UserVO;
+import de.schmidtdennis.popupchinese.quarkus.service.HistoryService;
 import de.schmidtdennis.popupchinese.quarkus.service.LikeService;
 import de.schmidtdennis.popupchinese.quarkus.service.UserService;
 import jakarta.annotation.security.PermitAll;
@@ -28,6 +30,9 @@ public class UserController {
 
     @Inject
     private LikeService likeService;
+
+    @Inject
+    private HistoryService historyService;
 
     @POST
     @Path("/add")
@@ -82,6 +87,22 @@ public class UserController {
     public List<LikeVO> getLikes(@Context SecurityContext securityContext){
         String userEmail = securityContext.getUserPrincipal().getName();
         return likeService.getAll(userEmail);
+    }
+
+    @POST
+    @RolesAllowed(value = {"user", "admin"})
+    @Path("/history/add")
+    public HistoryItemVO addHistoryItem(@Context SecurityContext securityContext, @QueryParam("lessonId") Long lessonId){
+        String userEmail = securityContext.getUserPrincipal().getName();
+        return historyService.add(userEmail, lessonId);
+    }
+
+    @GET
+    @RolesAllowed(value = {"user", "admin"})
+    @Path("/history")
+    public List<HistoryItemVO> getHistory(@Context SecurityContext securityContext){
+        String userEmail = securityContext.getUserPrincipal().getName();
+        return historyService.getAll(userEmail);
     }
 
 }
