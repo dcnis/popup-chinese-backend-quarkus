@@ -2,25 +2,33 @@
 
 # Development workflow
 
-### 1. Build your app in development mode
+## 1. Build your app in development mode
 
 ```bash
 mvn compile quarkus:dev
 ```
 
-### 2. Produce a native executable
+## 2. Produce a native executable
+### With GraalVM (preferably and faster)
+```bash
+mvn package -Dnative -Dquarkus.native.container-build=true
+```
+
+#### Or without GraalVM
 ```bash
 mvn clean package -Dnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true -Dquarkus.profile=prod
 ```
 
-### 3. Build the docker image
+
+
+## 3. Build the docker image
 Based on the `Dockerfile.native-micro`, create a docker image.
     
 ```bash
 docker build -f src/main/docker/Dockerfile.native-micro -t dcnis/popup-chinese-backend-quarkus .
 ```
 
-### 4. Run the docker image
+## 4. Run the docker image
 Preferably use `docker-compose` to run your container. It uses the `docker-compose.yml` in the root folder.
 This will spin up the entire app with the quarkus app, PostgreSQL DB and redis.
 ```bash
@@ -31,13 +39,13 @@ Or run the backend quarkus app image manually via `docker run`
 docker run -i --rm -p 8080:8080 -e DB_USERNAME=postgres -e DB_PASSWORD=postgres -e DB_URI=jdbc:postgresql://172.17.0.2:5432/postgres dcnis/popup-chinese-backend-quarkus
 ```
 
-### 5. Push the docker image to Docker Hub
+## 5. Push the docker image to Docker Hub
 
 ```bash
 docker push dcnis/popup-chinese-backend-quarkus
 ```
 
-## Connect to RDS PostgreSQL from EC2 instance
+# Connect to RDS PostgreSQL from EC2 instance
 
 ```bash
 psql \
