@@ -19,11 +19,12 @@ start \
 
 echo "spin-up backend"
 docker run -i --rm -p 8080:8080 \
--e DB_USERNAME=postgres \
--e DB_PASSWORD=postgres \
--e DB_URI=jdbc:postgresql://172.17.0.3:5432/postgres \
+-e DB_USERNAME=admin \
+-e DB_PASSWORD=secret \
+-e DB_URI=jdbc:postgresql://192.168.240.2:5432/popupchinese \
 -e KEYCLOAK_CLIENT_ID=backend-service \
 -e KEYCLOAK_CLIENT_SECRET=secret \
--e KEYCLOAK_URL=https://172.17.0.2:8443/realms/quarkus \
+-e KEYCLOAK_URL=https://192.168.240.3:8443/realms/quarkus \
+--name app \
 dcnis/popup-chinese-backend-quarkus
 

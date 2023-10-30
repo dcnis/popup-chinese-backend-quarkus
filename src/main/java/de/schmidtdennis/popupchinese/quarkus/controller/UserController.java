@@ -15,7 +15,7 @@ import jakarta.ws.rs.QueryParam;
 
 import java.util.List;
 
-@Path("/api/user")
+@Path("/api/users")
 public class UserController {
 
     @Inject

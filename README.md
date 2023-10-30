@@ -3,7 +3,7 @@
 This project is the popup-chinese backend and uses Quarkus, Docker, Maven, PostgreSQL and Redis.
 
 ## Prerequisites
-1. JDK 11+ installed with JAVA_HOME configured appropriately
+1. JDK17 installed with JAVA_HOME configured appropriately
 2. Apache Maven 3.9.3
 3. Docker container runtime
 4. Optionally Mandrel or GraalVM installed

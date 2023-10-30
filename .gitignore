@@ -3,6 +3,7 @@
 .idea/
 target/
 *.env
+/cert
 
 # Log file
 *.log
