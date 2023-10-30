@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS user_likes (
      user_email VARCHAR(100),
      lesson_id BIGINT,
      gmt_timestamp BIGINT NOT NULL,
-     CONSTRAINT unique_1 UNIQUE (user_email, lesson_id)
+     CONSTRAINT user_likes_uq_1 UNIQUE (user_email, lesson_id)
      );
 
 CREATE TABLE IF NOT EXISTS user_history (
@@ -49,6 +49,6 @@ CREATE TABLE IF NOT EXISTS user_history (
      user_email VARCHAR(100),
      lesson_id BIGINT,
      gmt_timestamp BIGINT NOT NULL,
-     CONSTRAINT unique_1 UNIQUE (user_email, lesson_id)
+     CONSTRAINT user_history_uq_1 UNIQUE (user_email, lesson_id)
      );
 

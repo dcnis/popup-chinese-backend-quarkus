@@ -30,6 +30,7 @@ docker build -f src/main/docker/Dockerfile.native-micro -t dcnis/popup-chinese-b
 
 ## 4. Run the docker image
 Preferably use `docker-compose` to run your container. It uses the `docker-compose.yml` in the root folder.
+This way all servics are within the same network and the backend can wait for the postgresql and keycloak services.
 This will spin up the entire app with the quarkus app, PostgreSQL DB and redis.
 ```bash
 docker compose up
@@ -81,6 +82,11 @@ aws dynamodb create-table --table-name QuarkusFruits \
 ## Run keycloak in docker
 See also: [Keycloak-Guide](https://www.keycloak.org/getting-started/getting-started-docker)
 ```bash
-docker run -p 8543:8443 -v "$(pwd)"/config/keycloak-keystore.jks:/etc/keycloak-keystore.jks --name keycloak -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:22.0.5 start-dev --hostname-strict=false --https-key-store-file=/etc/keycloak-keystore.jks
+docker run -p 8543:8443 -v "$(pwd)"/config/keycloak-keystore.jks:/etc/keycloak-keystore.jks --name keycloak -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:22.0.5 start --hostname-strict=false --https-key-store-file=/etc/keycloak-keystore.jks
 ```
 
+## Check IP-address of docker container
+```bash
+docker inspect \
+  -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name_or_id
+```

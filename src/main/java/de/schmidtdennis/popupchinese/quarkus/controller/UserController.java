@@ -12,8 +12,6 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.QueryParam;
-import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.SecurityContext;
 
 import java.util.List;
 
@@ -34,8 +32,8 @@ public class UserController {
 
     @GET
     @Path("/me")
-    public UserVO get(@Context SecurityContext securityContext){
-        String username = securityContext.getUserPrincipal().getName();
+    public UserVO get(){
+        String username = identity.getPrincipal().getName();
         return userService.getByEmail(username);
     }
 
@@ -47,29 +45,29 @@ public class UserController {
 
     @POST
     @Path("/likes/add")
-    public LikeVO addLike(@Context SecurityContext securityContext, @QueryParam("lessonId") Long lessonId){
-        String userEmail = securityContext.getUserPrincipal().getName();
+    public LikeVO addLike(@QueryParam("lessonId") Long lessonId){
+        String userEmail = identity.getPrincipal().getName();
         return likeService.add(userEmail, lessonId);
     }
 
     @GET
     @Path("/likes/getAll")
-    public List<LikeVO> getLikes(@Context SecurityContext securityContext){
-        String userEmail = securityContext.getUserPrincipal().getName();
+    public List<LikeVO> getLikes(){
+        String userEmail = identity.getPrincipal().getName();
         return likeService.getAll(userEmail);
     }
 
     @POST
     @Path("/history/add")
-    public HistoryItemVO addHistoryItem(@Context SecurityContext securityContext, @QueryParam("lessonId") Long lessonId){
-        String userEmail = securityContext.getUserPrincipal().getName();
+    public HistoryItemVO addHistoryItem(@QueryParam("lessonId") Long lessonId){
+        String userEmail = identity.getPrincipal().getName();
         return historyService.add(userEmail, lessonId);
     }
 
     @GET
     @Path("/history")
-    public List<HistoryItemVO> getHistory(@Context SecurityContext securityContext){
-        String userEmail = securityContext.getUserPrincipal().getName();
+    public List<HistoryItemVO> getHistory(){
+        String userEmail = identity.getPrincipal().getName();
         return historyService.getAll(userEmail);
     }
 

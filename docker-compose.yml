@@ -1,15 +1,26 @@
 version: "3.8"
 
 services:
-  app:
-    container_name: popup-chinese-app
-    build:
-      dockerfile: src/main/docker/Dockerfile.native-micro
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres-15
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - pg-data-volume:/var/lib/postgresql/data
+      - ./scripts/schema.sql:/docker-entrypoint-initdb.d/1.sql
+      - ./scripts/load-data.sql:/docker-entrypoint-initdb.d/2.sql
     ports:
-      - "8080:8080"
+      - "5432:5432"
+    networks:
+      - popup-chinese-network
+
+
+volumes:
+  pg-data-volume:
+
+networks:
+  popup-chinese-network:
