@@ -90,3 +90,10 @@ docker run -p 8543:8443 -v "$(pwd)"/config/keycloak-keystore.jks:/etc/keycloak-k
 docker inspect \
   -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name_or_id
 ```
+
+## Export keycloak realm from docker container
+```bash
+docker exec -it keycloak bash
+cd /opt/keycloak/bin
+./kc.sh export --file /tmp/export.json --realm quarkus --users same_file
+```

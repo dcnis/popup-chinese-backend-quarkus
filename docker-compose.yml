@@ -31,11 +31,13 @@ services:
     volumes:
       - ./cert/keycloak-cert.pem:/etc/keycloak-cert.pem
       - ./cert/keycloak-private-key.pem:/etc/keycloak-key.pem
+      - ./scripts/keycloak-realm.json:/opt/keycloak/data/import/keycloak-realm.json
     command: ['start',
               '--hostname-strict=false',
               '--https-certificate-file=/etc/keycloak-cert.pem',
               '--https-certificate-key-file=/etc/keycloak-key.pem',
-              '--log-level=INFO']
+              '--log-level=INFO',
+              '--import-realm']
     depends_on:
       - "postgres"
 
