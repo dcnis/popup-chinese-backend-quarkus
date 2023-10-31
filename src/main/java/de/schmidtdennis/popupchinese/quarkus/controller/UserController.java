@@ -2,10 +2,8 @@ package de.schmidtdennis.popupchinese.quarkus.controller;
 
 import de.schmidtdennis.popupchinese.quarkus.model.valueobject.HistoryItemVO;
 import de.schmidtdennis.popupchinese.quarkus.model.valueobject.LikeVO;
-import de.schmidtdennis.popupchinese.quarkus.model.valueobject.UserVO;
 import de.schmidtdennis.popupchinese.quarkus.service.HistoryService;
 import de.schmidtdennis.popupchinese.quarkus.service.LikeService;
-import de.schmidtdennis.popupchinese.quarkus.service.UserService;
 import io.quarkus.security.identity.SecurityIdentity;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
@@ -15,11 +13,8 @@ import jakarta.ws.rs.QueryParam;
 
 import java.util.List;
 
-@Path("/api/users")
+@Path("/api/user")
 public class UserController {
-
-    @Inject
-    private UserService userService;
 
     @Inject
     private LikeService likeService;
@@ -29,13 +24,6 @@ public class UserController {
 
     @Inject
     private SecurityIdentity identity;
-
-    @GET
-    @Path("/me")
-    public UserVO get(){
-        String username = identity.getPrincipal().getName();
-        return userService.getByEmail(username);
-    }
 
     @GET
     @Path("/myIdentity")
