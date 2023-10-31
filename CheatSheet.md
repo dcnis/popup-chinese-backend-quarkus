@@ -77,14 +77,6 @@ aws dynamodb create-table --table-name QuarkusFruits \
                           --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
 ```
 
-# Keycloak
-
-## Run keycloak in docker
-See also: [Keycloak-Guide](https://www.keycloak.org/getting-started/getting-started-docker)
-```bash
-docker run -p 8543:8443 -v "$(pwd)"/config/keycloak-keystore.jks:/etc/keycloak-keystore.jks --name keycloak -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:22.0.5 start --hostname-strict=false --https-key-store-file=/etc/keycloak-keystore.jks
-```
-
 ## Check IP-address of docker container
 ```bash
 docker inspect \
