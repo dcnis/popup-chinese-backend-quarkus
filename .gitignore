@@ -4,6 +4,7 @@
 target/
 *.env
 /cert
+.DS_Store
 
 # Log file
 *.log
