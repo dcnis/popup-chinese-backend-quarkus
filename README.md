@@ -8,12 +8,36 @@ This project is the popup-chinese backend and uses Quarkus, Docker, Maven, Postg
 3. Docker container runtime
 4. Optionally Mandrel or GraalVM installed
 
+Make sure your docker application `popup-chinese-backend-quarkus` is running with following containers. If not, run `docker-compose.yml`.
+```
+keycloak
+postgres-15
+```
+
 ## Running the application in dev mode
 
 You can run your application in dev mode that enables live coding using:
 ```shell script
 mvn compile quarkus:dev
 ```
+
+### Keycloak
+Keycloak is running at `https://localhost:8443/` with the default user `admin` and default password `admin`.
+There is a client `backend-service`, which configures access under `Authorization` using `Resources` and `Policies` and `Permissions`.
+
+#### Log in to keycloak
+
+**getAccessToken**<br>
+URL: `https://localhost:8443/realms/quarkus/protocol/openid-connect/token` <br>
+Body: `x-www-form-urlencoded`
+```bash
+client_id: backend-service
+username: alice@mail.com
+password: test
+grant_type: password
+client_secret: secret
+```
+
 
 ## Creating a native executable
 
